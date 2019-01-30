@@ -10,15 +10,19 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
+//code to create cookie session {
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 10000,
         keys: [keys.cookieKey]
     })
 );
+//code to initialize cookie session
 app.use(passport.initialize());
 app.use(passport.session());
+//}
 
+//enables routes to be watched by app
 require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000
